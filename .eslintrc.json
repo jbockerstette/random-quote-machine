@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "plugins": ["prettier", "html"],
+  "settings": {
+    "html/report-bad-indent": "error",
+    "html/html-extensions": [".html"],
+    "html/indent": "+2"
+  },
+  "rules": {
+    "react/forbid-prop-types": "off",
+    "react/no-did-mount-set-state": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "no-console": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": [2, { "ignore": ["children"] }],
+    "no-undef": "off",
+    "prettier/prettier": ["error", { "singleQuote": true }]
+  },
+  "parser": "babel-eslint"
+}
