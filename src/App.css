@@ -1,28 +1,57 @@
-.App {
-  text-align: center;
+.grid {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  background: gray;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.grid p {
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.grid #quote-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 450px;
+  border: solid whitesmoke 1px;
+  border-radius: 5px;
+  padding: 32px;
+  background: whitesmoke;
 }
 
-.App-title {
-  font-size: 1.5em;
+.grid #quote-box #text {
+  grid-column: 1 / -1;
+  font-size: 24px;
+  text-align: start;
+  margin: 0;
 }
 
-.App-intro {
-  font-size: large;
+.grid #quote-box #author {
+  grid-column: 1 / -1;
+  justify-self: end;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.grid #quote-box #new-quote {
+  grid-column: 2 / -1;
+  justify-self: end;
+}
+
+.grid #quote-box #tweet-quote {
+  grid-column: 1 / 2;
+  justify-self: start;
+}
+
+.btn {
+  font-size: normal;
+  border: 0;
+  color: whitesmoke;
+  padding: 12px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
