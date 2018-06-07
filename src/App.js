@@ -33,7 +33,7 @@ const Quote = ({ quote, ...rest }) => (
 const Author = ({ author, ...rest }) => <p {...rest}>{`- ${author}`}</p>;
 
 class App extends React.Component {
-  state = { quotes: [], quote: 0, colorIndex: 0 };
+  state = { quotes: [], quote: 0, colorIndex: 0, opacity: 0 };
   async componentDidMount() {
     try {
       const json = await fetch(
@@ -59,21 +59,24 @@ class App extends React.Component {
   };
 
   handleNextQuote = () => {
-    const quote = Math.round(Math.random() * this.state.quotes.length);
-    this.setState(({ colorIndex }) => {
-      let nextColor = colorIndex + 1;
-      if (nextColor === colors.length) {
-        nextColor = 0;
-      }
-      return { quote, colorIndex: nextColor };
-    });
+    this.setState(() => ({ opacity: 0 }));
+    setTimeout(() => {
+      const quote = Math.round(Math.random() * this.state.quotes.length);
+      this.setState(({ colorIndex }) => {
+        let nextColor = colorIndex + 1;
+        if (nextColor === colors.length) {
+          nextColor = 0;
+        }
+        return { quote, colorIndex: nextColor, opacity: 1 };
+      });
+    }, 1500);
   };
 
   render() {
-    const { quotes, quote, colorIndex } = this.state;
+    const { quotes, quote, colorIndex, opacity } = this.state;
     const q = quotes[quote];
     const bgColor = { background: colors[colorIndex] };
-    const color = { color: colors[colorIndex] };
+    const color = { color: colors[colorIndex], opacity };
     const href = this.getTwitterLink(q);
 
     return q ? (

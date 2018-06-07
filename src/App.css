@@ -3,10 +3,7 @@
   align-items: center;
   justify-items: center;
   height: 100%;
-  background: gray;
-}
-
-.grid p {
+  transition: all 1.5s ease;
 }
 
 .grid #quote-box {
@@ -24,11 +21,13 @@
   font-size: 24px;
   text-align: start;
   margin: 0;
+  transition: all 1.5s ease;
 }
 
 .grid #quote-box #author {
   grid-column: 1 / -1;
   justify-self: end;
+  transition: all 1.5s ease;
 }
 
 .grid #quote-box #new-quote {
@@ -50,6 +49,7 @@
   outline: none;
   cursor: pointer;
   text-decoration: none;
+  transition: all 1.5s ease;
 }
 
 .btn:hover {
