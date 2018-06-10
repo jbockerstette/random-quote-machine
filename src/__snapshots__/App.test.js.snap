@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Author always renders correctly 1`] = `
+<p
+  id="author"
+  style={
+    Object {
+      "color": "red",
+      "opacity": 0.5,
+    }
+  }
+>
+  - jim
+</p>
+`;
+
+exports[`Button always renders correctly 1`] = `
+<button
+  className="btn"
+  id="new-quote"
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+/>
+`;
+
+exports[`ButtonLink always renders correctly 1`] = `
+<a
+  className="btn fa fa-twitter"
+  href="myhref"
+  id="tweet-quote"
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+  target="_blank"
+/>
+`;
+
+exports[`Grid always renders correctly 1`] = `
+<div
+  className="grid"
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+/>
+`;
+
+exports[`Quote always renders correctly 1`] = `
+<p
+  id="text"
+  style={
+    Object {
+      "color": "red",
+      "opacity": 0.5,
+    }
+  }
+>
+  <i
+    className="fa fa-quote-left"
+  />
+   hi 
+  <i
+    className="fa fa-quote-right"
+  />
+</p>
+`;

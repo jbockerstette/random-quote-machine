@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import App, { Grid } from './App';
+import renderer from 'react-test-renderer';
+import { mount, shallow } from 'enzyme';
+import App, { Grid, Quote, Button, ButtonLink, Author } from './App';
 
 const quotes = [
   {
@@ -9,12 +10,8 @@ const quotes = [
   }
 ];
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-// global.fetch = () => Promise.resolve(new Response(JSON.stringify({ quotes })));
-
 describe('App', () => {
-  let props;
+  const wrapper = shallow(<App />);
   let mountedApp;
   let spy;
   fetch.mockResponse(JSON.stringify({ quotes }));
@@ -28,26 +25,30 @@ describe('App', () => {
   };
 
   beforeEach(() => {
-    props = {};
     mountedApp = undefined;
   });
 
-  // All tests go here.
-  it('renders the correct components', async () => {
-    const app1 = await app();
-    const divs = app1.find('div');
-    const grid = app1.find('Grid');
-    const button = app1.find('Button');
-    const link = app1.find('ButtonLink');
-    const quote = app1.find('Quote');
-    const author = app1.find('Author');
-    expect(divs.length).toBeGreaterThan(0);
-    expect(grid.length).toBeGreaterThan(0);
-    expect(button.length).toBeGreaterThan(0);
-    expect(link.length).toBeGreaterThan(0);
-    expect(quote.length).toBeGreaterThan(0);
-    expect(author.length).toBeGreaterThan(0);
+  it('should render a Grid component', () => {
+    expect(wrapper.find('Grid').length).toEqual(1);
   });
+
+  it('should render a div #quote-box', () => {
+    expect(wrapper.find('#quote-box').length).toEqual(1);
+  });
+
+  it('should render a Quote component', () => {
+    expect(wrapper.find('Quote').length).toEqual(1);
+  });
+  it('should render a Author component', () => {
+    expect(wrapper.find('Author').length).toEqual(1);
+  });
+  it('should render a ButtonLink component', () => {
+    expect(wrapper.find('ButtonLink').length).toEqual(1);
+  });
+  it('should render a Button component', () => {
+    expect(wrapper.find('Button').length).toEqual(1);
+  });
+
   it('always sets correct state from mock', async () => {
     const app1 = await app();
     const { state } = app1.instance();
@@ -55,31 +56,26 @@ describe('App', () => {
     expect(state.quotes).toMatchObject(quotes);
   });
 
-  it('should have the correct Author', async () => {
-    const app1 = await app();
-    const author = app1.find('Author');
+  it('should have the correct Author', () => {
+    const author = shallow(<App />).find('Author');
     expect(author.get(0).props).toHaveProperty('id', 'author');
     expect(author.get(0).props).toHaveProperty('author', '');
   });
-  it('should have the correct Quote', async () => {
-    const app1 = await app();
-    const quote = app1.find('Quote');
+  it('should have the correct Quote', () => {
+    const quote = shallow(<App />).find('Quote');
     expect(quote.get(0).props).toHaveProperty('id', 'text');
     expect(quote.get(0).props).toHaveProperty('quote', '');
   });
-  it('should have the correct ButtonLink', async () => {
-    const app1 = await app();
-    const bl = app1.find('ButtonLink');
+  it('should have the correct ButtonLink', () => {
+    const bl = shallow(<App />).find('ButtonLink');
     expect(bl.get(0).props).toHaveProperty('id', 'tweet-quote');
   });
-  it('should have the correct Button', async () => {
-    const app1 = await app();
-    const btn = app1.find('Button');
+  it('should have the correct Button', () => {
+    const btn = shallow(<App />).find('Button');
     expect(btn.get(0).props).toHaveProperty('id', 'new-quote');
     expect(spy).toHaveBeenCalledTimes(0);
     btn.simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
-    // expect(app1.find('#text').get(0).props).toHaveProperty('opacity', 0);
   });
   it('should have the correct quote and author after click', async done => {
     const app1 = await app();
@@ -95,13 +91,55 @@ describe('App', () => {
 });
 
 describe('Grid', () => {
-  const mountedGrid = mount(<Grid bgColor="red" />);
-  it('always renders a div', () => {
-    const divs = mountedGrid.find('div');
-    expect(divs.length).toBeGreaterThan(0);
+  const component = renderer.create(<Grid bgColor="red" />);
+  it('always renders correctly', () => {
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
-  it('should set the bg color style from props', () => {
-    const divs = mountedGrid.find('div');
-    expect(divs.get(0).props.style).toHaveProperty('background', 'red');
+});
+
+describe('Quote', () => {
+  const component = renderer.create(
+    <Quote id="text" color="red" opacity={0.5} quote="hi" />
+  );
+  it('always renders correctly', () => {
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('Author', () => {
+  const component = renderer.create(
+    <Author id="author" color="red" opacity={0.5} author="jim" />
+  );
+  it('always renders correctly', () => {
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('Button', () => {
+  const component = renderer.create(
+    <Button id="new-quote" bgColor="red" onClick={jest.fn()} />
+  );
+  it('always renders correctly', () => {
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('ButtonLink', () => {
+  const component = renderer.create(
+    <ButtonLink
+      className="fa fa-twitter"
+      id="tweet-quote"
+      bgColor="red"
+      href="myhref"
+      target="_blank"
+    />
+  );
+  it('always renders correctly', () => {
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

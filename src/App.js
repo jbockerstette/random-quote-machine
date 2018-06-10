@@ -75,7 +75,7 @@ class App extends React.Component {
   handleNextQuote() {
     this.setState(() => ({ opacity: 0 }));
     setTimeout(() => {
-      const quote = Math.round(Math.random() * this.state.quotes.length);
+      const quote = Math.round(Math.random() * this.state.quotes.length - 1);
       this.setState(({ colorIndex }) => {
         let nextColor = colorIndex + 1;
         if (nextColor === colors.length) {
