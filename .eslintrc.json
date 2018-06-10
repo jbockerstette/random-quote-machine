@@ -11,10 +11,11 @@
     "react/no-did-mount-set-state": "off",
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "jsx-a11y/anchor-has-content": "off",
     "no-console": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
-    "react/prop-types": [2, { "ignore": ["children"] }],
+    "react/prop-types": "off",
     "no-undef": "off",
     "prettier/prettier": ["error", { "singleQuote": true }]
   },

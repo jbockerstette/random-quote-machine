@@ -20,8 +20,8 @@
   grid-column: 1 / -1;
   font-size: 24px;
   text-align: start;
-  margin: 0;
   transition: all 1.5s ease;
+  margin: 0;
 }
 
 .grid #quote-box #author {
