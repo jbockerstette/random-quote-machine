@@ -46,7 +46,7 @@ class App extends React.Component {
       quotes: [{ quote: '', author: '' }],
       quote: 0,
       colorIndex: 0,
-      opacity: 0
+      opacity: 1
     };
     this.handleNextQuote = this.handleNextQuote.bind(this);
   }
@@ -83,7 +83,7 @@ class App extends React.Component {
         }
         return { quote, colorIndex: nextColor, opacity: 1 };
       });
-    }, 0);
+    }, 1000);
   }
 
   render() {
@@ -91,6 +91,7 @@ class App extends React.Component {
     const q = quotes[quote];
     const color = colors[colorIndex];
     const href = App.getTwitterLink(q);
+    console.log(q);
     return q ? (
       <Grid bgColor={color}>
         <div id="quote-box">
